@@ -1,9 +1,5 @@
 package com.oblongmana.webviewfileuploadandroid;
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ActivityEventListener;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
@@ -12,6 +8,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.webkit.ValueCallback;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.common.annotations.VisibleForTesting;
 
 public class AndroidWebViewModule extends ReactContextBaseJavaModule implements ActivityEventListener {
@@ -55,7 +54,7 @@ public class AndroidWebViewModule extends ReactContextBaseJavaModule implements 
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (null == mUploadMessage && null == mUploadCallbackAboveL){
                 return;
