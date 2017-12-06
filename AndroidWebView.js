@@ -168,6 +168,13 @@ class AndroidWebView extends Component {
      */
     javaScriptEnabled: PropTypes.bool,
 
+     /**
+     * Used on Android Lollipop and above only, third party cookies are enabled
+     * by default for WebView on Android Kitkat and below and on iOS
+     * @platform android
+     */
+    thirdPartyCookiesEnabled: PropTypes.bool,
+
     /**
      * Used on Android only, controls whether DOM Storage is enabled or not
      * @platform android
@@ -254,6 +261,7 @@ class AndroidWebView extends Component {
 
   static defaultProps = {
     javaScriptEnabled: true,
+    thirdPartyCookiesEnabled: true,
     scalesPageToFit: true,
     saveFormDataDisabled: false
   };
@@ -416,6 +424,7 @@ class AndroidWebView extends Component {
         injectedJavaScript={this.props.injectedJavaScript}
         userAgent={this.props.userAgent}
         javaScriptEnabled={this.props.javaScriptEnabled}
+        thirdPartyCookiesEnabled={this.props.thirdPartyCookiesEnabled}
         domStorageEnabled={this.props.domStorageEnabled}
         messagingEnabled={typeof this.props.onMessage === 'function'}
         onMessage={this.onMessage}
