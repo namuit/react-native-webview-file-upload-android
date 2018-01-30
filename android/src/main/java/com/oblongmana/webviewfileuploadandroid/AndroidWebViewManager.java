@@ -24,6 +24,8 @@ import com.oblongmana.webviewfileuploadandroid.AndroidWebViewModule;
 
 public class AndroidWebViewManager extends ReactWebViewManager {
 
+    private ThemedReactContext mReactContext;
+
     private Activity mActivity = null;
     private AndroidWebViewPackage aPackage;
     public String getName() {
@@ -35,7 +37,7 @@ public class AndroidWebViewManager extends ReactWebViewManager {
         WebView view = super.createViewInstance(reactContext);
         //Now do our own setWebChromeClient, patching in file chooser support
         final AndroidWebViewModule module = this.aPackage.getModule();
-        view.setWebChromeClient(new WebChromeClient(){
+        view.setWebChromeClient(new VideoWebChromeClient(reactContext.getCurrentActivity(), view){
 
             public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
                 module.setUploadMessage(uploadMsg);
@@ -107,7 +109,7 @@ public class AndroidWebViewManager extends ReactWebViewManager {
                 Toast.makeText(module.getActivity().getApplicationContext(), downloadMessage, Toast.LENGTH_LONG).show();
             }
         });
-
+        this.mReactContext = reactContext;
         return view;
     }
 
